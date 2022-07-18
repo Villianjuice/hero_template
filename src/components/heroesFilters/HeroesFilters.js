@@ -5,11 +5,7 @@ import { changeFilter } from '../../actions';
 import classNames from 'classnames';
 
 const HeroesFilters = () => {
-  const { filters, filtersLoadingStatus, activeFilter } = useSelector(({filters}) => ({
-    filters: filters.filters,
-    filtersLoadingStatus: filters.filtersLoadingStatus,
-    activeFilter: filters.activeFilter,
-  }));
+  const { filters, filtersLoadingStatus, activeFilter } = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
   if (filtersLoadingStatus === 'loading') {
