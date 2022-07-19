@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { fetchFilters, heroCreate } from '../../actions';
+import { fetchFilters } from '../../actions';
 import { useHttp } from '../../hooks/http.hook';
+import {heroCreate} from '../../slices/heroesSlice'
 
 const HeroesAddForm = () => {
   const dispatch = useDispatch();

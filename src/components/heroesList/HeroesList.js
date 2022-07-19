@@ -13,7 +13,6 @@ const HeroesList = () => {
     (state) => state.heroes.heroes,
     (activeFilter, heroes) => {
       if (activeFilter === 'all') {
-        console.log('qwe');
         return heroes;
       } else {
         return heroes.filter((hero) => hero.element === activeFilter);
@@ -40,6 +39,7 @@ const HeroesList = () => {
   }
 
   const renderHeroesList = (arr) => {
+    console.log(arr);
     if (arr.length === 0) {
       return <h5 className="text-center mt-5">Героев пока нет</h5>;
     }
