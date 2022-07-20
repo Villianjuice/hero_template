@@ -1,33 +1,20 @@
-import { useHttp } from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+// import {  } from '@reduxjs/toolkit';
 
-import { fetchHeroes } from '../../actions';
+import { fetchHeroes, filteredHeroesSelector } from '../../slices/heroesSlice';
 import HeroesListItem from '../heroesListItem/HeroesListItem';
 import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
-  const filteredHeroesSelector = createSelector(
-    (state) => state.filters.activeFilter,
-    (state) => state.heroes.heroes,
-    (activeFilter, heroes) => {
-      if (activeFilter === 'all') {
-        return heroes;
-      } else {
-        return heroes.filter((hero) => hero.element === activeFilter);
-      }
-    },
-  );
 
   const filteredHeroes = useSelector(filteredHeroesSelector)
 
   const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus);
   const dispatch = useDispatch();
-  const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(fetchHeroes(request));
+    dispatch(fetchHeroes());
 
     // eslint-disable-next-line
   }, []);
@@ -39,7 +26,6 @@ const HeroesList = () => {
   }
 
   const renderHeroesList = (arr) => {
-    console.log(arr);
     if (arr.length === 0) {
       return <h5 className="text-center mt-5">Героев пока нет</h5>;
     }
@@ -50,7 +36,9 @@ const HeroesList = () => {
   };
 
   const elements = renderHeroesList(filteredHeroes);
-  return <ul>{elements}</ul>;
+  return <ul>
+  {elements}
+  </ul>;
 };
 
 export default HeroesList;
